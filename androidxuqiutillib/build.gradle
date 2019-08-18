@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 28
@@ -21,6 +22,26 @@ android {
         }
     }
 
+}
+
+ext {
+    PUBLISH_GROUP_ID = "com.example.androidlibdemo"
+    PUBLISH_ARTIFACT_ID = 'AndroidXuqiUtilLib'
+    PUBLISH_VERSION = '1.0'
+    PUBLISH_URL = 'file:///Users/xuqi/Documents/aar'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url:PUBLISH_URL)
+            pom.project {
+                groupId project.PUBLISH_GROUP_ID
+                artifactId project.PUBLISH_ARTIFACT_ID
+                version project.PUBLISH_VERSION
+            }
+        }
+    }
 }
 
 dependencies {
